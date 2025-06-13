@@ -1,324 +1,71 @@
-# Exception Handling dalam Java - Laporan Praktikum
+📖 Praktikum Exception Handling 
+---
+## Informasi Mahasiswa
+- **Nama**: Siti Rahma Alia
+- **Kelas**: TI23A  
+- **NIM**: 20230040023
+---
+## 🔍 Hasil Analisis Percobaan
 
-## Informasi Praktikum
-- **Mata Kuliah**: Pemrograman Berorientasi Objek
-- Nama : Siti Rahma Alia
-- Nim : 20230040023
+### Percobaan 1: `ArrayIndexOutOfBoundsException`
+- **Error** : Mengakses indeks ke-5 dari array berukuran 5 menyebabkan `ArrayIndexOutOfBoundsException`.
+- **Perbaikan**: Menggunakan `try-catch` untuk menangani error agar program tetap berjalan.
+- **Tujuan**: Mengenalkan dasar exception handling saat bekerja dengan array.
+
+### Percobaan 2: Perulangan Melebihi Indeks Array
+- **Error**:Perulangan melebihi panjang array sehingga menimbulkan exception.
+- **Perbaikan**: Menangani error dengan `try-catch` dan mereset nilai indeks.
+- **Tujuan**: Menangani error yang berulang dalam struktur kontrol seperti loop.
+
+### Percobaan 3: `ArithmeticException` (Pembagian dengan Nol)
+- **Error:** Operasi `10 / 0` menimbulkan `ArithmeticException`.
+- **Perbaikan:** Menangani error menggunakan blok `try-catch`.
+- **Tujuan:** Menangani kesalahan aritmatika.
+
+### Percobaan 4: Multiple Exception
+- **Error:** Kombinasi error dari pembagian dengan nol dan akses array yang salah.
+- **Perbaikan:** Menyusun beberapa blok `catch` untuk tiap jenis exception.
+- **Tujuan:** Menangani banyak jenis exception dalam satu program.
+
+### Percobaan 5: Menampilkan Detail Error
+- **Fokus:** Menampilkan detail error (`getMessage()`, `printStackTrace()`).
+- **Tujuan:** Mengetahui informasi yang bisa diperoleh dari sebuah exception.
+
+### Percobaan 6: Manual `throw` Exception
+- **Fokus:** Secara eksplisit melempar `NullPointerException`.
+- **Tujuan:** Menunjukkan bahwa exception bisa dilempar secara manual.
+
+### Percobaan 7: `throw` Exception dengan Pesan
+- **Fokus:** Melempar objek `Exception` dengan pesan tertentu.
+- **Tujuan:** Memahami metode dalam class `Exception` seperti `getMessage()` dan `printStackTrace()`.
+
+### Percobaan 8: Penggunaan `throws` dan `finally`
+- **Fokus:** Method dengan `throws`, dan implementasi `finally` untuk eksekusi akhir.
+- **Tujuan:** Menjelaskan konsep `throws`, penanganan error, dan blok `finally`.
+
+### Percobaan 9: Validasi Input Kosong
+- **Fokus:** Fungsi melempar exception jika parameter string kosong.
+- **Tujuan:** Menangani exception yang dilempar dari dalam fungsi.
+
+### Percobaan 10: Penanganan `IOException` dalam File
+- **Fokus:** Menggunakan `RandomAccessFile` untuk membaca/menulis file.
+- **Tujuan:** Menangani error saat melakukan operasi file.
+
+### Percobaan 11: Custom `Throwable` Class
+- **Fokus:** Membuat class turunan dari `Throwable` dan melemparkannya.
+- **Tujuan:** Mengetahui bahwa tidak hanya `Exception`, `Throwable` juga bisa digunakan.
+
+### Percobaan 12: Custom Exception dengan `extends Exception`
+- **Fokus:** Membuat class exception sendiri yang extends `Exception`.
+- **Tujuan:** Memberikan penanganan error khusus untuk kondisi tertentu.
 
 ---
 
-##  Daftar Isi
-
-1. [Tujuan Praktikum](#-tujuan-praktikum)
-2. [Ringkasan Percobaan](#-ringkasan-percobaan)
-3. [Hasil Praktikum](#-hasil-praktikum)
-   - [Percobaan 1: Penanganan ArrayIndexOutOfBoundsException](#percobaan-1-penanganan-arrayindexoutofboundsexception)
-   - [Percobaan 2: Exception dalam Loop](#percobaan-2-exception-dalam-loop)
-   - [Percobaan 3: ArithmeticException](#percobaan-3-arithmeticexception)
-   - [Percobaan 4: Multiple Exception Handling](#percobaan-4-multiple-exception-handling)
-   - [Percobaan 5: Metode Informasi Exception](#percobaan-5-metode-informasi-exception)
-   - [Percobaan 6: Penggunaan throw](#percobaan-6-penggunaan-throw)
-   - [Percobaan 7: Custom Exception Message](#percobaan-7-custom-exception-message)
-   - [Percobaan 8: throws dan finally](#percobaan-8-throws-dan-finally)
-   - [Percobaan 9: Exception Propagation](#percobaan-9-exception-propagation)
-   - [Percobaan 10: IOException](#percobaan-10-ioexception)
-   - [Percobaan 11: Custom Exception (Throwable)](#percobaan-11-custom-exception-throwable)
-   - [Percobaan 12: Custom Exception (Exception)](#percobaan-12-custom-exception-exception)
-4. [Analisis dan Pembelajaran](#-analisis-dan-pembelajaran)
-
----
-
-## Tujuan Praktikum
-
-Praktikum ini bertujuan untuk memahami konsep fundamental exception handling dalam Java, meliputi:
-
-- **Memahami** berbagai jenis exception yang umum terjadi
-- **Menguasai** penggunaan blok try-catch-finally
-- **Mengimplementasikan** multiple exception handling
-- **Membuat** custom exception classes
-- **Menerapkan** best practices dalam error handling
-
-Exception handling merupakan mekanisme penting dalam Java yang memungkinkan program menangani kondisi error secara elegan tanpa menyebabkan program berhenti mendadak.
-
----
-## Hasil Praktikum
-
-### Percobaan 1: Penanganan ArrayIndexOutOfBoundsException
-
-**Masalah:** Program mencoba mengakses indeks array yang tidak valid
-```java
-int a[]=new int[5];
-a[5]=100; // Error: indeks maksimal adalah 4
-```
-
-**Solusi:** Implementasi try-catch block
-```java
-try {
-    a[5]=100;
-} catch(Exception e) {
-    System.out.println("Terjadi pelanggaran memory");
-}
-```
-
-**Pembelajaran:** ArrayIndexOutOfBoundsException terjadi ketika mengakses elemen array di luar batas yang valid. Java melakukan bound checking untuk mencegah akses memori yang tidak aman.
-
----
-
-### Percobaan 2: Exception dalam Loop
-
-**Masalah:** Loop mengakses indeks array yang melebihi ukuran array
-```java
-String greeting[]={"Hello World!", "No, I mean it!", "Hello World"};
-while(i<4) { // Array hanya memiliki 3 elemen
-    System.out.println(greeting[i]);
-    i++;
-}
-```
-
-**Solusi:** Exception handling dengan reset mechanism
-```java
-try {
-    System.out.println(greetings[i]);
-    i++;
-} catch(ArrayIndexOutOfBoundsException e) {
-    System.out.println("Resetting index value");
-    i=0;
-}
-```
-
-**Pembelajaran:** Exception dapat digunakan sebagai recovery mechanism, meskipun lebih baik mencegah dengan validasi kondisi loop.
-
----
-
-### Percobaan 3: ArithmeticException
-
-**Masalah:** Pembagian dengan nol menghasilkan ArithmeticException
-```java
-int bil=10;
-System.out.println(bil/0); // Error matematika
-```
-
-**Solusi:** Specific exception handling
-```java
-try {
-    System.out.println(bil/0);
-} catch(ArithmeticException e) {
-    System.out.println("Terjadi Aritmatika error");
-} catch(Exception e) {
-    System.out.println("Ini menghandle error yang terjadi");
-}
-```
-
-**Pembelajaran:** Multiple catch blocks memungkinkan penanganan yang spesifik berdasarkan jenis exception. Urutan catch blocks penting - dari spesifik ke umum.
-
----
-
-### Percobaan 4: Multiple Exception Handling
-
-**Konsep:** Menangani berbagai jenis exception dalam satu try block
-```java
-try {
-    System.out.println(bil/0);           // ArithmeticException
-    System.out.println(b[3]);            // ArrayIndexOutOfBoundsException
-} catch(ArithmeticException e) {
-    System.out.println("Terjadi Aritmatika error");
-} catch(ArrayIndexOutOfBoundsException e) {
-    System.out.println("Melebihi jumlah array");
-}
-```
-
-**Pembelajaran:** Hanya satu exception yang dapat terjadi per eksekusi try block. Urutan statement dalam try block menentukan exception mana yang akan terjadi terlebih dahulu.
-
----
-
-### Percobaan 5: Metode Informasi Exception
-
-**Implementasi:** Eksplorasi berbagai metode untuk mendapatkan detail exception
-```java
-catch(ArithmeticException e) {
-    System.out.println("Pesan error: ");
-    System.out.println(e.getMessage());     // Pesan singkat
-    System.out.println("Info stack erase");
-    e.printStackTrace();                    // Stack trace lengkap
-    e.printStackTrace(System.out);
-}
-```
-
-**Pembelajaran:** 
-- `getMessage()`: Pesan singkat exception
-- `printStackTrace()`: Stack trace ke System.err
-- `printStackTrace(System.out)`: Stack trace ke System.out
-
----
-
-### Percobaan 6: Penggunaan throw
-
-**Implementasi:** Manual exception throwing
-```java
-static void demo() {
-    NullPointerException t = new NullPointerException("Coba Throw");
-    throw t;
-    // Kode setelah throw tidak akan dieksekusi
-    System.out.println("Ini tidak lagi dicetak");
-}
-```
-
-**Pembelajaran:** Kata kunci `throw` memungkinkan programmer melempar exception secara eksplisit. Eksekusi berhenti setelah throw statement.
-
----
-
-### Percobaan 7: Custom Exception Message
-
-**Implementasi:** Membuat exception dengan pesan custom
-```java
-try {
-    throw new Exception("Here's my Exception");
-} catch(Exception e) {
-    System.out.println("e.getMessage():" + e.getMessage());
-    System.out.println("e.toString():" + e.toString());
-    e.printStackTrace();
-}
-```
-
-**Pembelajaran:** Perbedaan antara `getMessage()`, `toString()`, dan `printStackTrace()` dalam memberikan informasi exception.
-
----
-
-### Percobaan 8: throws dan finally
-
-**Implementasi:** Delegasi exception handling dan cleanup operations
-```java
-public void methodB() throws IOException {
-    System.out.println(20/0);
-}
-
-// Alternatif dengan try-catch-finally
-try {
-    o.methodB();
-} catch(Exception e) {
-    System.out.println("Error di Method B");
-} finally {
-    System.out.println("Ini selalu dicetak");
-}
-```
-
-**Pembelajaran:** 
-- `throws`: Mendelegasikan penanganan exception ke method pemanggil
-- `finally`: Blok yang selalu dieksekusi untuk cleanup operations
-
----
-
-### Percobaan 9: Exception Propagation
-
-**Implementasi:** Exception yang berpindah melalui call stack
-```java
-public static String reverse(String s) throws Exception {
-    if(s.length()==0) {
-        throw new Exception();
-    }
-    // Logic reverse string
-    return reverseStr;
-}
-```
-
-**Pembelajaran:** Exception dapat dipropagasi dari method yang dipanggil ke method pemanggil, memungkinkan separation of concerns yang baik.
-
----
-
-### Percobaan 10: IOException
-
-**Implementasi:** File operations dengan exception handling
-```java
-try {
-    RandomAccessFile books = new RandomAccessFile("books.txt","rw");
-    // File operations
-    books.close();
-} catch(IOException e) {
-    System.out.println("Indeks melebihi batas");
-}
-```
-
-**Pembelajaran:** IOException adalah checked exception yang harus ditangani untuk operasi I/O. File operations memerlukan proper exception handling.
-
----
-
-### Percobaan 11: Custom Exception (Throwable)
-
-**Implementasi:** Membuat exception class dengan extending Throwable
-```java
-class RangeErrorException extends Throwable {
-    public RangeErrorException(String s) {
-        super(s);
-    }
-}
-```
-
-**Pembelajaran:** Custom exception memungkinkan error handling yang spesifik untuk domain aplikasi. Extending Throwable memberikan fleksibilitas maksimal.
-
----
-
-### Percobaan 12: Custom Exception (Exception)
-
-**Implementasi:** Business logic exception dengan extending Exception
-```java
-class MyException extends Exception {
-    private String Teks;
-    MyException(String s) {
-        Teks="Exception generated by: "+s;
-        System.out.println(Teks);
-    }
-}
-```
-
-**Pembelajaran:** Custom exception dapat memiliki behavior tambahan dan digunakan untuk mengimplementasikan business rules yang spesifik.
-
----
-
-## 🔍 Analisis dan Pembelajaran
-
-### Konsep Fundamental
-
-1. **Exception Hierarchy**: Memahami hierarki exception dari Throwable → Exception → RuntimeException
-2. **Checked vs Unchecked**: Perbedaan antara checked exceptions (harus ditangani) dan unchecked exceptions
-3. **Exception Propagation**: Bagaimana exception berpindah melalui call stack
-4. **Resource Management**: Penggunaan finally block untuk cleanup operations
-
-### Best Practices
-
-- **Specific Exception Handling**: Gunakan catch blocks yang spesifik daripada generic Exception
-- **Meaningful Messages**: Berikan pesan yang informatif untuk debugging
-- **Proper Cleanup**: Gunakan finally block untuk resource cleanup
-- **Custom Exceptions**: Buat custom exception untuk business logic yang spesifik
-
-### Pola Umum Exception Handling
-
-1. **Try-Catch-Finally Pattern**
-   ```java
-   try {
-       // Risky operations
-   } catch(SpecificException e) {
-       // Handle specific exception
-   } catch(Exception e) {
-       // Handle general exception
-   } finally {
-       // Cleanup operations
-   }
-   ```
-
-2. **Method Declaration with throws**
-   ```java
-   public void methodName() throws IOException {
-       // Operations that may throw IOException
-   }
-   ```
-
-3. **Custom Exception Creation**
-   ```java
-   class CustomException extends Exception {
-       public CustomException(String message) {
-           super(message);
-       }
-   }
-   ```
+## Kesimpulan
+
+- Exception Handling merupakan bagian penting dalam membuat program yang tangguh dan aman dari crash.
+- Java menyediakan berbagai mekanisme seperti `try-catch`, `throw`, `throws`, dan `finally` untuk menangani error.
+- Penanganan exception sebaiknya dilakukan secara spesifik dan terstruktur agar memudahkan debugging.
+- Penggunaan custom exception membantu menyesuaikan penanganan error dengan kebutuhan aplikasi.
 
 ---
